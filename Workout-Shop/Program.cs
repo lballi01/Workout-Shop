@@ -1,7 +1,13 @@
+using Workout_Shop.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connString = builder.Configuration.GetConnectionString("EccomerceGym");
+builder.Services.AddSqlite<ApplicationDBContext>(connString);
+
 
 var app = builder.Build();
 
