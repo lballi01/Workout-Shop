@@ -11,6 +11,8 @@ builder.Services.AddSqlite<ApplicationDBContext>(connString);
 
 var app = builder.Build();
 
+AppDBInitialiser.Seed(app);
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -31,3 +33,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+

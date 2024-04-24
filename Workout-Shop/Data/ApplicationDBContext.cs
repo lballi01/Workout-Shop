@@ -26,7 +26,7 @@ namespace Workout_Shop.Data
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Gyms> Gyms { get; set; }
 
-        public DbSet<Creator> Creators { get; set; }
+        public DbSet<MainInstructor> MainInstructors { get; set; }
 
         public DbSet<Instructor_Workout> Instructor_Workouts { get; set; }
 

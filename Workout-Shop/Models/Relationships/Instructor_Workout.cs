@@ -6,10 +6,8 @@ namespace Workout_Shop.Models.Relationships
     {
 
         public int WorkoutId { get; set; }
-
         public Workout Workout { get; set; }
         public int InstructorId { get; set; }
-
         public Instructor Instructor { get; set; }
     }
 }

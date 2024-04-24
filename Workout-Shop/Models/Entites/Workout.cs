@@ -32,14 +32,12 @@ namespace Workout_Shop.Models.Entites
         //Gym
         public int GymId { get; set; }
         [ForeignKey("GymId")]
-
         public Gyms Gyms { get; set; }
 
         //Main Instructor
         public int MainInstructorId { get; set; }
         [ForeignKey("MainInstructorId")]
-
-        public Creator creator { get; set; }
+        public MainInstructor MainInstructor { get; set; }
 
     }
 }

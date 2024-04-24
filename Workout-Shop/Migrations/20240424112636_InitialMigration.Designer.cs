@@ -11,7 +11,7 @@ using Workout_Shop.Data;
 namespace Workout_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240423203230_InitialMigration")]
+    [Migration("20240424112636_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -19,29 +19,6 @@ namespace Workout_Shop.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
-
-            modelBuilder.Entity("Workout_Shop.Models.Entites.Creator", b =>
-                {
-                    b.Property<int>("MainInstructorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Biography")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProfilePicture")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("MainInstructorId");
-
-                    b.ToTable("Creators");
-                });
 
             modelBuilder.Entity("Workout_Shop.Models.Entites.Gyms", b =>
                 {
@@ -87,6 +64,29 @@ namespace Workout_Shop.Migrations
                     b.HasKey("InstructorId");
 
                     b.ToTable("Instructors");
+                });
+
+            modelBuilder.Entity("Workout_Shop.Models.Entites.MainInstructor", b =>
+                {
+                    b.Property<int>("MainInstructorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Biography")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MainInstructorId");
+
+                    b.ToTable("MainInstructors");
                 });
 
             modelBuilder.Entity("Workout_Shop.Models.Entites.Workout", b =>
@@ -157,7 +157,7 @@ namespace Workout_Shop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Workout_Shop.Models.Entites.Creator", "creator")
+                    b.HasOne("Workout_Shop.Models.Entites.MainInstructor", "MainInstructor")
                         .WithMany("Workouts")
                         .HasForeignKey("MainInstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -165,7 +165,7 @@ namespace Workout_Shop.Migrations
 
                     b.Navigation("Gyms");
 
-                    b.Navigation("creator");
+                    b.Navigation("MainInstructor");
                 });
 
             modelBuilder.Entity("Workout_Shop.Models.Relationships.Instructor_Workout", b =>
@@ -187,11 +187,6 @@ namespace Workout_Shop.Migrations
                     b.Navigation("Workout");
                 });
 
-            modelBuilder.Entity("Workout_Shop.Models.Entites.Creator", b =>
-                {
-                    b.Navigation("Workouts");
-                });
-
             modelBuilder.Entity("Workout_Shop.Models.Entites.Gyms", b =>
                 {
                     b.Navigation("Workouts");
@@ -200,6 +195,11 @@ namespace Workout_Shop.Migrations
             modelBuilder.Entity("Workout_Shop.Models.Entites.Instructor", b =>
                 {
                     b.Navigation("Instructor_Workout");
+                });
+
+            modelBuilder.Entity("Workout_Shop.Models.Entites.MainInstructor", b =>
+                {
+                    b.Navigation("Workouts");
                 });
 
             modelBuilder.Entity("Workout_Shop.Models.Entites.Workout", b =>

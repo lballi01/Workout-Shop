@@ -5,7 +5,7 @@ namespace Workout_Shop.Models.Entites
     /// <summary>
     /// Main Instructor
     /// </summary>
-    public class Creator
+    public class MainInstructor
 
     {
         [Key]

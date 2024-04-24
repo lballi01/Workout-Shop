@@ -12,21 +12,6 @@ namespace Workout_Shop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Creators",
-                columns: table => new
-                {
-                    MainInstructorId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProfilePicture = table.Column<string>(type: "TEXT", nullable: false),
-                    FullName = table.Column<string>(type: "TEXT", nullable: false),
-                    Biography = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Creators", x => x.MainInstructorId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Gyms",
                 columns: table => new
                 {
@@ -57,6 +42,21 @@ namespace Workout_Shop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MainInstructors",
+                columns: table => new
+                {
+                    MainInstructorId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProfilePicture = table.Column<string>(type: "TEXT", nullable: false),
+                    FullName = table.Column<string>(type: "TEXT", nullable: false),
+                    Biography = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MainInstructors", x => x.MainInstructorId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Workouts",
                 columns: table => new
                 {
@@ -76,16 +76,16 @@ namespace Workout_Shop.Migrations
                 {
                     table.PrimaryKey("PK_Workouts", x => x.WorkoutId);
                     table.ForeignKey(
-                        name: "FK_Workouts_Creators_MainInstructorId",
-                        column: x => x.MainInstructorId,
-                        principalTable: "Creators",
-                        principalColumn: "MainInstructorId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Workouts_Gyms_GymId",
                         column: x => x.GymId,
                         principalTable: "Gyms",
                         principalColumn: "GymId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Workouts_MainInstructors_MainInstructorId",
+                        column: x => x.MainInstructorId,
+                        principalTable: "MainInstructors",
+                        principalColumn: "MainInstructorId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -142,10 +142,10 @@ namespace Workout_Shop.Migrations
                 name: "Workouts");
 
             migrationBuilder.DropTable(
-                name: "Creators");
+                name: "Gyms");
 
             migrationBuilder.DropTable(
-                name: "Gyms");
+                name: "MainInstructors");
         }
     }
 }

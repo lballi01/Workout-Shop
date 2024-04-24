@@ -9,10 +9,11 @@ namespace Workout_Shop.Models.Entites
         public int InstructorId { get; set; }
 
         public string ProfilePicture { get; set; }
-
+        [Display (Name = "Profile Picture")]
         public string FullName { get; set; }
-
+        [Display(Name = "Full Name")]
         public string Biography { get; set; }
+        [Display(Name = "Biography")]
 
         //Relationships
         public List<Instructor_Workout> Instructor_Workout { get; set; }
