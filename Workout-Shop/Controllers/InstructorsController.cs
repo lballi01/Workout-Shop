@@ -1,20 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Workout_Shop.Data;
+using Workout_Shop.Data.Service;
+using Workout_Shop.Models.Entites;
 
 namespace Workout_Shop.Controllers
 {
     public class InstructorsController : Controller
     {
-        private readonly ApplicationDBContext _dbContext;
+        private readonly IInstructorService _instructorService;
 
-        public InstructorsController(ApplicationDBContext dbContext)
+        public InstructorsController(IInstructorService instructorService)
         {
-            _dbContext = dbContext;
+           _instructorService = instructorService;
         }
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Index()
         {
-            var data = _dbContext.Instructors.ToList();
+            var data = await  _instructorService.GetAllAsync();
             return View(data);
         }
+
+
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePicture,Biography")]Instructor instructor)
+        {
+            if(ModelState.IsValid)
+            {
+                return View(instructor);
+            }
+
+           await _instructorService.AddAsync(instructor);
+
+            return Redirect(nameof(Index));
+        }
+
+
+        
+        public async Task<IActionResult> Details (int id)
+        {
+            var InstructorDetails =await _instructorService.GetByIdAsync(id);
+
+            if(InstructorDetails == null) {
+
+                return View(Empty);
+            }
+
+             return View(InstructorDetails);
+
+
+        }
+
     }
 }

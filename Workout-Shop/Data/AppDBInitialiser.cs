@@ -40,7 +40,7 @@ namespace Workout_Shop.Data
                         {
                             FullName = "Actor 1",
                             Biography = "This is the Bio of the first actor",
-                            ProfilePicture = "1111"
+                            ProfilePicture = "http://dotnethow.net/images/actors/actor-1.jpeg"
                         }
                     });
 
