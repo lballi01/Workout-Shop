@@ -5,10 +5,10 @@ using Workout_Shop.Models.Relationships;
 
 namespace Workout_Shop.Models.Entites
 {
-    public class Workout
+    public class Plan
     {
         [Key]
-        public int WorkoutId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -26,7 +26,7 @@ namespace Workout_Shop.Models.Entites
 
         //Relationship
 
-        public List<Instructor_Workout> Instructor_Workout { get; set; }
+        public List<Instructor_Plan> Instructor_Plan { get; set; }
 
 
         //Gym

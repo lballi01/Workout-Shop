@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Workout_Shop.Data.Base.Interface;
 using Workout_Shop.Models.Relationships;
 
 namespace Workout_Shop.Models.Entites
 {
-    public class Instructor
+    public class Instructor : IEntityBase
     {
         [Key]
-        public int InstructorId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "ProfilePicture")]
         [Required(ErrorMessage = "Profile Picture is Required")]
@@ -27,6 +28,6 @@ namespace Workout_Shop.Models.Entites
         
 
         //Relationships
-        public List<Instructor_Workout> Instructor_Workout { get; set; }
+        public List<Instructor_Plan> Instructor_Workout { get; set; }
     }
 }

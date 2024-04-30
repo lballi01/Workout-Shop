@@ -18,5 +18,45 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: white;
+    color: white;
+}
+
+
+.background{
+    background-color: aqua;
+}
+
+.navbar {
+    background-color: #28282B;
+    color: white;
+    border-radius 10px;
+}
+
+.navbar-brand{
+    color: white;
+}
+
+.dropdown-item{
+    color:white
+}
+
+
+.card{
+    color:black;
+}
+
+
+.card-header {
+    background-color: #28282B;
+    color: white;
+}
+
+.card-body {
+    background-color: #FF5733;
+}
+
+.card-footer {
+    background-color: #FF5733;
 }

@@ -14,11 +14,11 @@ namespace Workout_Shop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Instructor_Workout>().HasKey(
-                iw => new { iw.InstructorId, iw.WorkoutId, });
+            modelBuilder.Entity<Instructor_Plan>().HasKey(
+                iw => new { iw.InstructorId, iw.PlanId, });
 
-            modelBuilder.Entity<Instructor_Workout>().HasOne(i => i.Workout).WithMany(iw => iw.Instructor_Workout).HasForeignKey(i => i.WorkoutId);
-            modelBuilder.Entity<Instructor_Workout>().HasOne(i => i.Instructor).WithMany(iw => iw.Instructor_Workout).HasForeignKey(i => i.InstructorId);
+            modelBuilder.Entity<Instructor_Plan>().HasOne(i => i.Plan).WithMany(iw => iw.Instructor_Plan).HasForeignKey(i => i.PlanId);
+            modelBuilder.Entity<Instructor_Plan>().HasOne(i => i.Instructor).WithMany(iw => iw.Instructor_Workout).HasForeignKey(i => i.InstructorId);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -28,9 +28,9 @@ namespace Workout_Shop.Data
 
         public DbSet<MainInstructor> MainInstructors { get; set; }
 
-        public DbSet<Instructor_Workout> Instructor_Workouts { get; set; }
+        public DbSet<Instructor_Plan> Instructor_Plans { get; set; }
 
-        public DbSet<Workout> Workouts { get; set; }
+        public DbSet<Plan> Plans { get; set; }
        
     }
 }

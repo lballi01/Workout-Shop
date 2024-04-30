@@ -2,11 +2,11 @@
 
 namespace Workout_Shop.Models.Relationships
 {
-    public class Instructor_Workout
+    public class Instructor_Plan
     {
 
-        public int WorkoutId { get; set; }
-        public Workout Workout { get; set; }
+        public int PlanId { get; set; }
+        public Plan Plan { get; set; }
         public int InstructorId { get; set; }
         public Instructor Instructor { get; set; }
     }

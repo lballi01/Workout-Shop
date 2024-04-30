@@ -5,15 +5,21 @@
 @{
 }
 
-@model IEnumerable<Workout>
+@model IEnumerable<Plan>
 
 @{
-    ViewData["Title"] = "List of Instructors";
+    ViewData["Title"] = "List of Plans";
 }
 
 <div>
     <h1>
         Workouts
+    </h1>
+</div>
+
+<div class= "background">
+    <h1>
+        This is for the background;
     </h1>
 </div>
 
@@ -24,7 +30,7 @@
             <div class="card mb-3" style="max-width:540px;">
                 <div class="row g-0">
                     <div class="col-md-12">
-                        <div class="card-header text bg-white bg-dark">
+                        <div class="card-header text">
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @item.Name

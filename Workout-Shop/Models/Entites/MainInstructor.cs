@@ -17,6 +17,6 @@ namespace Workout_Shop.Models.Entites
 
         public string Biography { get; set; }
 
-        public List<Workout> Workouts { get; set; }
+        public List<Plan> Workouts { get; set; }
     }
 }

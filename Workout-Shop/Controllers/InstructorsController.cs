@@ -38,7 +38,7 @@ namespace Workout_Shop.Controllers
 
            await _instructorService.AddAsync(instructor);
 
-            return Redirect(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -49,12 +49,71 @@ namespace Workout_Shop.Controllers
 
             if(InstructorDetails == null) {
 
-                return View(Empty);
+                return View("NotFound");
             }
 
              return View(InstructorDetails);
 
 
+        }
+
+        //Get : Actors/Edit/1
+        public async Task<IActionResult> Edit(int id)
+        {
+            var instructorDetails = await _instructorService.GetByIdAsync(id);
+
+            if (instructorDetails == null)
+            {
+
+                return View("NotFound");
+            }
+
+            return View(instructorDetails);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Instructor instructor)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(instructor);
+            }
+
+            await _instructorService.UpdateAsync(id, instructor);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        //Get : Actors/Delete/1
+        public async Task<IActionResult> Delete(int id)
+        {
+            var instructorDetails = await _instructorService.GetByIdAsync(id);
+
+            if (instructorDetails == null)
+            {
+
+                return View("NotFound");
+            }
+
+            return View(instructorDetails);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var instructorDetails = await _instructorService.GetByIdAsync(id);
+            if (instructorDetails == null)
+            {
+
+                return View("NotFound");
+            }
+
+            await _instructorService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Index));
         }
 
     }

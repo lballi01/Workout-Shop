@@ -11,7 +11,7 @@ namespace Workout_Shop.Models.Entites
         public string Description { get; set; }
         public string Logo { get; set; }
 
-        public List<Workout> Workouts { get; set; }
+        public List<Plan> Workouts { get; set; }
 
     }
 }

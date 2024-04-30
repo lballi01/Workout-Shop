@@ -63,10 +63,10 @@ namespace Workout_Shop.Data
                     context.SaveChanges();
                 }
                 //Workouts
-                if (!context.Workouts.Any())
+                if (!context.Plans.Any())
                 {
-                    context.Workouts.AddRange(new List<Workout>(){
-                        new Workout() {
+                    context.Plans.AddRange(new List<Plan>(){
+                        new Plan() {
                             Name = "Life",
                             Description = "This is the Life movie description",
                             Price = 39.50,
@@ -81,18 +81,8 @@ namespace Workout_Shop.Data
                     context.SaveChanges();
                 }
 
-               //Workouts_Instructors
-                if (!context.Instructor_Workouts.Any())
-                {
-                    context.Instructor_Workouts.AddRange(new List<Instructor_Workout>(){
-                        new Instructor_Workout() {
-                            InstructorId = 1,
-                            WorkoutId = 1,
-                        },
-                    });
-
-                    context.SaveChanges();
-                }
+    
+                
             }
         }
     }
