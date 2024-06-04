@@ -16,7 +16,7 @@ namespace Workout_Shop.Data
 
                 //Gyms
 
-                if (!context.Gyms.Any())
+                /*if (!context.Gyms.Any())
                 {
                     context.Gyms.AddRange(new List<Gyms>(){
                         new Gyms()
@@ -70,7 +70,7 @@ namespace Workout_Shop.Data
                             Name = "Life",
                             Description = "This is the Life movie description",
                             Price = 39.50,
-                            ImageURL = "111",
+                            ImageURL = "https://prod-ne-cdn-media.puregym.com/media/819394/gym-workout-plan-for-gaining-muscle_header.jpg?quality=80",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
                             GymId = 1,
@@ -80,11 +80,10 @@ namespace Workout_Shop.Data
                     });
                     context.SaveChanges();
                 }
-
+*/
     
                 
             }
         }
     }
 }
-

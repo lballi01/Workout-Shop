@@ -1,0 +1,98 @@
+﻿@using Workout_Shop.Models.Entites
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Plan
+
+@{
+    ViewData["Title"] = " Plan Details";
+}
+
+
+
+<div class="row">
+    <h1>Available</h1>
+
+        <div class="col-md-8 offset-2">
+            <div class="card mb-3" style="max-width:540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @Model.Name                   
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="@Model.ImageURL" width="100%" alt="@Model.Name"></img>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text">@Model.Description</p>
+                            <p class="card-text">
+                            <b>Gym</b>
+                            <a asp-controller="Gyms" asp-action="Details" asp-route-id="Model.GymsId">@Model.Gyms.Name</a>
+                            </p>
+                        <p class="card-text">
+                            <b>Main Instructors</b>
+                            <a asp-controller="MainInstructor" asp-action="Details" asp-route-id="Model.MainInstructorId">@Model.MainInstructor.FullName</a>
+                        </p>
+                            <p class="card-text"><b>Category</b> @Model.WorkoutCategory</p>
+                            <p class="card-text"><b>Start Date</b> @Model.StartDate.ToString("dd/MMM/yyy")</p>
+                            <p class="card-text"><b>End Date</b> @Model.EndDate.ToString("dd/MMM/yyy")</p>
+                            <p class="card-text">
+                                <b>Status</b>
+                                @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+                                {
+                                    <span class="badge bg-available">Available</span>
+                                }
+                                else if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate.AddDays(-15))
+                                {
+
+                                    <span class="badge bg-ending-soon">Ending Soon</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-completed">Completed</span>
+
+                                }
+                            </p>
+                            <p class="card-text">
+                                <b>Instructors</b>
+                            <hr />
+                                <div class="row">
+                                @foreach (var instructor in Model.Instructor_Plan){
+                                   <div class="flex-column text-center">
+                                       <img class="border-info rounded-circle" src="@instructor.Instructor.ProfilePicture" style="max-width: 150px" />
+                                       <br />
+                                        <a asp-controller="Instructors" asp-action="Details" asp-route-id="@instructor.InstructorId">@instructor.Instructor.FullName</a>
+                                   </div>
+                                }
+                                </div>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-13">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn float-right" asp-action="Index">
+                                Back To List
+                                </a>
+                            <a class="btn float-right"><i class="bi bi-eye-fill"></i>Add to Cart(Price @Model.Price.ToString("c"))</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+    
+</div>

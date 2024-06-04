@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Workout_Shop.Data;
-using Workout_Shop.Data.Service;
+using Workout_Shop.Data.Service.IService;
 using Workout_Shop.Models.Entites;
 
 namespace Workout_Shop.Controllers

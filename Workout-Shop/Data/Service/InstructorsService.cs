@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Workout_Shop.Data.Base;
+using Workout_Shop.Data.Service.IService;
 using Workout_Shop.Models.Entites;
 
 namespace Workout_Shop.Data.Service

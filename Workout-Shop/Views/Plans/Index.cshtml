@@ -11,21 +11,13 @@
     ViewData["Title"] = "List of Plans";
 }
 
-<div>
-    <h1>
-        Workouts
-    </h1>
-</div>
 
-<div class= "background">
-    <h1>
-        This is for the background;
-    </h1>
-</div>
 
 <div class="row">
+    <h1>Available</h1>
     @foreach(var item in Model)
     {
+        //if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate){
         <div class="col-md-4 col-xs-6 border-primary mb-3">
             <div class="card mb-3" style="max-width:540px;">
                 <div class="row g-0">
@@ -49,12 +41,18 @@
                             <p class="card-text"><b>Category</b> @item.WorkoutCategory</p>
                             <p class="card-text"><b>Start Date</b> @item.StartDate.ToString("dd/MMM/yyy")</p>
                             <p class="card-text"><b>End Date</b> @item.EndDate.ToString("dd/MMM/yyy")</p>
-                            <p class="card-text"><b>Status</b> @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                            <p class="card-text"><b>Status</b> 
+                                @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
                                 {
-                                    <span class="badge bg-success">In Progress</span>
+                                    <span class="badge bg-available">Available</span>
+                                }
+                                else if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate.AddDays(-15))
+                                {
+
+                                    <span class="badge bg-ending-soon">Ending Soon</span>
                                 }
                                 else{
-                                    <span class="badge bg-primary">Completed</span>
+                                    <span class="badge bg-completed">Completed</span>
                                     
                                     }
                                 </p>
@@ -64,14 +62,15 @@
                 <div class="col-md-13">
                     <div class="card-footer">
                         <p class="card-text">
-                            <a class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i>Show Details</a>
-                            <a class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i>Add to Cart(Price @item.Price.ToString("c"))</a>
+                            <a class="btn float-right" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i>Show Details</a>
+                            <a class="btn float-right"><i class="bi bi-eye-fill"></i>Add to Cart(Price @item.Price.ToString("c"))</a>
                         </p>
 
                     </div>
                 </div>
             </div>
         </div>
+        //}
 
     }
 </div>

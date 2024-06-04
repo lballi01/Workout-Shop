@@ -1,4 +1,5 @@
-﻿using Workout_Shop.Models.Entites;
+﻿using System.Linq.Expressions;
+using Workout_Shop.Models.Entites;
 
 namespace Workout_Shop.Data.Base.Interface
 {
@@ -6,6 +7,9 @@ namespace Workout_Shop.Data.Base.Interface
     {
 
         Task<IEnumerable<T>> GetAllAsync();
+
+
+        Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties);
 
         Task<T> GetByIdAsync(int id);
 

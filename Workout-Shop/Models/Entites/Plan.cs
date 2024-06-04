@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Workout_Shop.Data.Base.Interface;
 using Workout_Shop.Data.Enums;
 using Workout_Shop.Models.Relationships;
 
 namespace Workout_Shop.Models.Entites
 {
-    public class Plan
+    public class Plan:IEntityBase
     {
         [Key]
         public int Id { get; set; }
