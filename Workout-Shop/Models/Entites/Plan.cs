@@ -17,6 +17,8 @@ namespace Workout_Shop.Models.Entites
 
         public double Price { get; set; }
 
+        public int count { get; set; }
+
         public string ImageURL { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -24,6 +26,8 @@ namespace Workout_Shop.Models.Entites
         public DateTime EndDate { get; set; }
 
         public WorkoutCategory WorkoutCategory { get; set; }
+
+
 
         //Relationship
 

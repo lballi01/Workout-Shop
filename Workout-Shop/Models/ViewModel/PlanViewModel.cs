@@ -4,7 +4,7 @@ using Workout_Shop.Data.Base.Interface;
 using Workout_Shop.Data.Enums;
 using Workout_Shop.Models.Relationships;
 
-namespace Workout_Shop.Models.Entites
+namespace Workout_Shop.Models
 {
     public class PlanViewModel
     {
@@ -40,7 +40,6 @@ namespace Workout_Shop.Models.Entites
 
         //Main Instructor
         public int MainInstructorId { get; set; }
-       
-
+        public int Id { get; set; }
     }
 }

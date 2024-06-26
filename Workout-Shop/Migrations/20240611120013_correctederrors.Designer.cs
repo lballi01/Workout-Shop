@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Workout_Shop.Data;
 
@@ -10,9 +11,11 @@ using Workout_Shop.Data;
 namespace Workout_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240611120013_correctederrors")]
+    partial class correctederrors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -167,9 +170,6 @@ namespace Workout_Shop.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("WorkoutCategory")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("count")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

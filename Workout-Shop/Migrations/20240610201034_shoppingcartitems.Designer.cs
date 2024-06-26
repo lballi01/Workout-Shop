@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Workout_Shop.Data;
 
@@ -10,9 +11,11 @@ using Workout_Shop.Data;
 namespace Workout_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240610201034_shoppingcartitems")]
+    partial class shoppingcartitems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -115,6 +118,9 @@ namespace Workout_Shop.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("MovieId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("INTEGER");
 
@@ -126,9 +132,9 @@ namespace Workout_Shop.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("MovieId");
 
-                    b.HasIndex("PlanId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems");
                 });
@@ -167,9 +173,6 @@ namespace Workout_Shop.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("WorkoutCategory")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("count")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -221,15 +224,15 @@ namespace Workout_Shop.Migrations
 
             modelBuilder.Entity("Workout_Shop.Models.Entites.OrderItem", b =>
                 {
-                    b.HasOne("Workout_Shop.Models.Entites.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
+                    b.HasOne("Workout_Shop.Models.Entites.Plan", "Plan")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Workout_Shop.Models.Entites.Plan", "Plan")
-                        .WithMany()
-                        .HasForeignKey("PlanId")
+                    b.HasOne("Workout_Shop.Models.Entites.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -14,10 +14,51 @@
 
 
 <div class="row">
-    <h1>Available</h1>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Workout With Me</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="dropdown-item" asp-area="" asp-controller="Plans" asp-action="Index"><i class="bi bi-camera-reels"></i> Workout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item" asp-controller="Gyms" asp-action="Index"> Gyms </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item" asp-controller="MainInstructor" asp-action="Index"><i class="bi bi-headset"></i> Main Instructors</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="dropdown-item" asp-controller="Instructors" asp-action="Index"><i class="bi bi-person-square"></i> Instructors </a>
+
+                    </li>
+
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px;">
+                    <input name="searchString" type="text" class="form-control" placeholder="Search for a plan..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+
+            </div>
+        </div>
+
+        <ul class="navbar-nav">
+            @await Component.InvokeAsync("ShoppingCartSummary")
+        </ul>
+    </nav>
+    
+
     @foreach(var item in Model)
     {
-        //if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate){
+        
         <div class="col-md-4 col-xs-6 border-primary mb-3">
             <div class="card mb-3" style="max-width:540px;">
                 <div class="row g-0">
@@ -26,7 +67,7 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @item.Name
-                                    <a class="text-white float-right"><i class="bg-info bi-pencil-square"></i></a>
+                                    <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bg-info bi-pencil-square"></i></a>
                                 </h5>
                             </p>
                         </div>
@@ -39,6 +80,7 @@
                             <p class="card-text">@item.Description</p>
                             <p class="card-text"><b>Gym</b> @item.Gyms.Name</p> 
                             <p class="card-text"><b>Category</b> @item.WorkoutCategory</p>
+                            <p class="card-text"><b>Downloads</b> @item.count</p>
                             <p class="card-text"><b>Start Date</b> @item.StartDate.ToString("dd/MMM/yyy")</p>
                             <p class="card-text"><b>End Date</b> @item.EndDate.ToString("dd/MMM/yyy")</p>
                             <p class="card-text"><b>Status</b> 
@@ -63,14 +105,17 @@
                     <div class="card-footer">
                         <p class="card-text">
                             <a class="btn float-right" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i>Show Details</a>
-                            <a class="btn float-right"><i class="bi bi-eye-fill"></i>Add to Cart(Price @item.Price.ToString("c"))</a>
+                            <a class="btn float-right" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i>Add to Cart(Price @item.Price.ToString("c"))</a>
                         </p>
 
                     </div>
                 </div>
             </div>
         </div>
-        //}
+        
 
     }
 </div>
+
+
+@await Html.PartialAsync("_CreateItem", "Plans")

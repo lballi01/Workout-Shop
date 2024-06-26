@@ -1,10 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Workout_Shop.Models.Entites
+@model IEnumerable<Plan>
 
 
+<div class="layout">
 <div class="banner">
 
     <video autoplay loop muted plays-inline class="video-bg">
@@ -44,6 +42,10 @@
 
             </div>
         </div>
+
+        <ul class="navbar-nav">
+            @await Component.InvokeAsync("ShoppingCartSummary")
+        </ul>
     </nav>
 
     <div class="content">
@@ -54,3 +56,35 @@
     </div>
 </div>
 
+
+
+<div>
+
+    <h1>Most Popular Workouts</h1>
+    <div class="workouts-container">
+
+        @foreach (var item in Model.OrderByDescending(i => i.count))
+        {
+            <a asp-controller="Plans" asp-action="Details" asp-route-id="@item.Id" class="card-link">
+                <div class="row mb-3 border-primary">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="@item.ImageURL" width="100%" alt="@item.Name" class="card-img">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <p class="card-text">@item.Description</p>
+                                    <p class="card-text"><b>Gym:</b> @item.Gyms.Name</p>
+                                    <p class="card-text"><b>Category:</b> @item.WorkoutCategory</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+        </div>
+
+</div> 
+</div>

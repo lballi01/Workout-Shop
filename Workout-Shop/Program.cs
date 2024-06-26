@@ -1,4 +1,5 @@
 using Workout_Shop.Data;
+using Workout_Shop.Data.Cart;
 using Workout_Shop.Data.Service;
 using Workout_Shop.Data.Service.IService;
 
@@ -10,8 +11,12 @@ builder.Services.AddScoped<IInstructorService, InstructorsService > ();
 builder.Services.AddScoped<IMainInstrcutorsService, MainInstrcutorService>();
 builder.Services.AddScoped<IGymsService, GymsService>();
 builder.Services.AddScoped<IPlansService, PlansService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IOrderService, OrdersService>();
 
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
+builder.Services.AddSession();
 
 var connString = builder.Configuration.GetConnectionString("EccomerceGym");
 builder.Services.AddSqlite<ApplicationDBContext>(connString);
@@ -34,6 +39,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 

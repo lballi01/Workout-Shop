@@ -1,23 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Workout_Shop.Data.Service.IService;
 using Workout_Shop.Models;
 
 namespace Workout_Shop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IPlansService _service;
 
-        public HomeController(ILogger<HomeController> logger)
+      
+
+        public HomeController(IPlansService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var data = await _service.GetAllAsync(n => n.Gyms);
+            return View(data);
         }
 
-        
+
     }
 }

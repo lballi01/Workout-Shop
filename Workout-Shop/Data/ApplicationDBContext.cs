@@ -31,6 +31,12 @@ namespace Workout_Shop.Data
         public DbSet<Instructor_Plan> Instructor_Plans { get; set; }
 
         public DbSet<Plan> Plans { get; set; }
-       
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
     }
 }

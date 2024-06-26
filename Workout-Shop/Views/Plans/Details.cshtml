@@ -43,6 +43,7 @@
                             <a asp-controller="MainInstructor" asp-action="Details" asp-route-id="Model.MainInstructorId">@Model.MainInstructor.FullName</a>
                         </p>
                             <p class="card-text"><b>Category</b> @Model.WorkoutCategory</p>
+                        <p class="card-text"><b>Downloads</b> @Model.count</p>
                             <p class="card-text"><b>Start Date</b> @Model.StartDate.ToString("dd/MMM/yyy")</p>
                             <p class="card-text"><b>End Date</b> @Model.EndDate.ToString("dd/MMM/yyy")</p>
                             <p class="card-text">
@@ -85,7 +86,7 @@
                             <a class="btn float-right" asp-action="Index">
                                 Back To List
                                 </a>
-                            <a class="btn float-right"><i class="bi bi-eye-fill"></i>Add to Cart(Price @Model.Price.ToString("c"))</a>
+                        <a class="btn float-right" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-eye-fill"></i>Add to Cart(Price @Model.Price.ToString("c"))</a>
                         </p>
 
                     </div>
