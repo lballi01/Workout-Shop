@@ -1,68 +1,55 @@
 ﻿@using Workout_Shop.Models.Entites
+@using Workout_Shop.Data.Enums
 @model IEnumerable<Plan>
 
+@{
+    ViewData["Title"] = "Home Page";
+}
 
-<div class="layout">
-<div class="banner">
 
-    <video autoplay loop muted plays-inline class="video-bg">
-        <source src="video1.mp4" type="video/mp4">
-    </video>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Workout With Me</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="dropdown-item" asp-area="" asp-controller="Plans" asp-action="Index"><i class="bi bi-camera-reels"></i> Workout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="dropdown-item" asp-controller="Gyms" asp-action="Index"> Gyms </a>
+<h1>Most Popular workouts</h1>
 
-                    </li>
-                    <li class="nav-item">
-                        <a class="dropdown-item" asp-controller="MainInstructor" asp-action="Index"><i class="bi bi-headset"></i> Main Instructors</a>
+<div class="just-flex">
 
-                    </li>
-                    <li class="nav-item">
-                        <a class="dropdown-item" asp-controller="Instructors" asp-action="Index"><i class="bi bi-person-square"></i> Instructors </a>
-
-                    </li>
-
-                </ul>
-
-                <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px;">
-                    <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-
-            </div>
-        </div>
-
-        <ul class="navbar-nav">
-            @await Component.InvokeAsync("ShoppingCartSummary")
-        </ul>
-    </nav>
-
-    <div class="content">
-        <h1>EXPLORE THE WORLD</h1>
-        <div>
-            <button type="button" class="btn">Explore</button>
+<div class="container-plan">
+<div class="slide">
+    
+    @foreach (var item in Model.OrderByDescending(i => i.count))
+        {
+            
+        <div class="item" style="background-image: url(@item.ImageURL);">
+        <div class="content">
+                        <div class="name">@item.Name</div>
+                        <div class="name">@item.WorkoutCategory</div>
+                        <div class="des">@item.Description</div>
+        <button><a asp-controller="Plans" asp-action="Details" asp-route-id="@item.Id" class="card-link">See More </a></button>
         </div>
     </div>
+        
+       
+        }
+        
+    </div>
+
+    <div class="button">
+        <button class="prev"><i class="bi bi-arrow-left"></i></button>
+        <button class="next"><i class="bi bi-arrow-right"></i></button>
+    </div>
+    </div>
+
+    
+
+
+
 </div>
 
 
 
+@* <div class="layout">
 <div>
-
-    <h1>Most Popular Workouts</h1>
+    
     <div class="workouts-container">
-
+            
         @foreach (var item in Model.OrderByDescending(i => i.count))
         {
             <a asp-controller="Plans" asp-action="Details" asp-route-id="@item.Id" class="card-link">
@@ -74,7 +61,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <p class="card-text">@item.Description</p>
+                                    <p class="card-text"><b>Gym:</b> @item.Name</p>
                                     <p class="card-text"><b>Gym:</b> @item.Gyms.Name</p>
                                     <p class="card-text"><b>Category:</b> @item.WorkoutCategory</p>
                                 </div>
@@ -85,6 +72,68 @@
             </a>
         }
         </div>
-
-</div> 
 </div>
+
+</div>
+<div class="layout">
+    <div>
+    
+    <div class="workouts-container">
+         
+    @foreach (var item in Model.Where(i => i.WorkoutCategory == WorkoutCategory.Cardio))
+    {
+        <a asp-controller="Plans" asp-action="Details" asp-route-id="@item.Id" class="card-link">
+            <div class="row mb-3 border-primary">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="@item.ImageURL" width="100%" alt="@item.Name" class="card-img">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                        <p class="card-text"><b>Gym:</b> @item.Name</p>
+                                <p class="card-text"><b>Gym:</b> @item.Gyms.Name</p>
+                                <p class="card-text"><b>Category:</b> @item.WorkoutCategory</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+
+</div>
+</div>
+
+
+    <div class="layout">
+        <div>
+            
+            <div class="workouts-container">
+               
+                @foreach (var item in Model.Where(i => i.WorkoutCategory == WorkoutCategory.Strength))
+                {
+                    <a asp-controller="Plans" asp-action="Details" asp-route-id="@item.Id" class="card-link">
+                        <div class="row mb-3 border-primary">
+                            <div class="card">
+                                <div class="row g-0">
+                                    <div class="col-md-6">
+                                        <img src="@item.ImageURL" width="100%" alt="@item.Name" class="card-img">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <p class="card-text"><b>Gym:</b> @item.Name</p>
+                                            <p class="card-text"><b>Gym:</b> @item.Gyms.Name</p>
+                                            <p class="card-text"><b>Category:</b> @item.WorkoutCategory</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+
+            </div>
+        </div>
+
+</div> *@

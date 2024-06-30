@@ -11,84 +11,54 @@
     ViewData["Title"] = "List of Main Instructors";
 }
 
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow">
-    <div class="container-fluid">
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Workout With Me</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="dropdown-item" asp-area="" asp-controller="Plans" asp-action="Index"><i class="bi bi-camera-reels"></i> Workout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="dropdown-item" asp-controller="Gyms" asp-action="Index"> Gyms </a>
 
-                </li>
-                <li class="nav-item">
-                    <a class="dropdown-item" asp-controller="MainInstructor" asp-action="Index"><i class="bi bi-headset"></i> Main Instructors</a>
 
-                </li>
-                <li class="nav-item">
-                    <a class="dropdown-item" asp-controller="Instructors" asp-action="Index"><i class="bi bi-person-square"></i> Instructors </a>
 
-                </li>
 
-            </ul>
 
-            <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px;">
-                <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
-            </form>
+<div class="plan-container">
 
+    <div class="box">
+        <form asp-controller="Home" asp-action="Index">
+            <input type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();">
+            @* <button class="btn-search"><i class="bi bi-search"></i></button> *@
+        </form>
+        <i class="bi bi-search"></i>
+    </div>
+
+
+    <div class="slider-container">
+        <div class="slider-images">
+            @foreach (var item in Model)
+            {
+                <div class="slider-img">
+                    <img src="@item.ProfilePicture" alt="@item.FullName" />
+                    <h1>@Html.DisplayFor(modelItem => item.FullName)</h1>
+                    <div class="details">
+                        <h2>@Html.DisplayFor(modelItem => item.FullName)</h2>
+                        <p>@Html.DisplayFor(modelItem => item.Biography)</p>
+                        <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-outline-info" asp-action="Delete" asp-route-id="@item.Id" S>Delete</a>
+                    </div>
+                </div>
+            }
         </div>
-    </div>
-
-    <ul class="navbar-nav">
-        @await Component.InvokeAsync("ShoppingCartSummary")
-    </ul>
-</nav>
-
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.ProfilePicture)</th>
-                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.Biography)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="align-middle">
-                            <img class= ="rounded-circle" src="@item.ProfilePicture" alt="@item.FullName" style="max-width: 150px" />
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.FullName)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Biography)
-                        </td>
-                        <td class="align-middle">
-                            <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Edit</a>
-                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details</a>
-                            <a class="btn btn-outline-info" asp-action="Delete" asp-route-id="@item.Id" S><i class="bi bi-eye"></i>Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-
-        </table>
-    </div>
-</div>
-
 <div style="position : fixed; right: 25px; bottom: 25px" class="text-white">
     <a asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New </a>  @* The as ASP action returns views from the controller*@
 </div>
+
+
+        @section Scripts {
+
+            <script>
+                jQuery(document).ready(function ($) {
+                    $(".slider-img").on("click", function () {
+                        $(".slider-img").removeClass("active");
+                        $(this).addClass("active");
+                    });
+                });
+
+
+            </script>
+        }

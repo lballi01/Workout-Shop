@@ -11,89 +11,48 @@
     ViewData["Title"] = " Plan Details";
 }
 
-
-
-<div class="row">
-    <h1>Available</h1>
-
-        <div class="col-md-8 offset-2">
-            <div class="card mb-3" style="max-width:540px;">
-                <div class="row g-0">
-                    <div class="col-md-12">
-                        <div class="card-header text">
-                            <p class="card-text">
-                                <h5 class="card-title">
-                                    @Model.Name                   
-                                </h5>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="@Model.ImageURL" width="100%" alt="@Model.Name"></img>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <p class="card-text">@Model.Description</p>
-                            <p class="card-text">
-                            <b>Gym</b>
-                            <a asp-controller="Gyms" asp-action="Details" asp-route-id="Model.GymsId">@Model.Gyms.Name</a>
-                            </p>
-                        <p class="card-text">
-                            <b>Main Instructors</b>
-                            <a asp-controller="MainInstructor" asp-action="Details" asp-route-id="Model.MainInstructorId">@Model.MainInstructor.FullName</a>
-                        </p>
-                            <p class="card-text"><b>Category</b> @Model.WorkoutCategory</p>
-                        <p class="card-text"><b>Downloads</b> @Model.count</p>
-                            <p class="card-text"><b>Start Date</b> @Model.StartDate.ToString("dd/MMM/yyy")</p>
-                            <p class="card-text"><b>End Date</b> @Model.EndDate.ToString("dd/MMM/yyy")</p>
-                            <p class="card-text">
-                                <b>Status</b>
-                                @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
-                                {
-                                    <span class="badge bg-available">Available</span>
-                                }
-                                else if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate.AddDays(-15))
-                                {
-
-                                    <span class="badge bg-ending-soon">Ending Soon</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-completed">Completed</span>
-
-                                }
-                            </p>
-                            <p class="card-text">
-                                <b>Instructors</b>
-                            <hr />
-                                <div class="row">
-                                @foreach (var instructor in Model.Instructor_Plan){
-                                   <div class="flex-column text-center">
-                                       <img class="border-info rounded-circle" src="@instructor.Instructor.ProfilePicture" style="max-width: 150px" />
-                                       <br />
-                                        <a asp-controller="Instructors" asp-action="Details" asp-route-id="@instructor.InstructorId">@instructor.Instructor.FullName</a>
-                                   </div>
-                                }
-                                </div>
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-13">
-                    <div class="card-footer">
-                        <p class="card-text">
-                            <a class="btn float-right" asp-action="Index">
-                                Back To List
-                                </a>
-                        <a class="btn float-right" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-eye-fill"></i>Add to Cart(Price @Model.Price.ToString("c"))</a>
-                        </p>
-
-                    </div>
-                </div>
-            </div>
+<div class="info">
+    <div class="left-side">
+        <div class="image-container">
+            <img src="@Model.ImageURL" width="100%" alt="@Model.Name"></img>
         </div>
-       
 
-    
+        <div class="plan-info">
+            <div class="title-name"><h1>@Model.Name</h1></div>
+        </div>
+
+        <div class="add-to-cart">
+            <a class="btn float-right" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-eye-fill"></i>Add to Cart(Price @Model.Price.ToString("c"))</a>
+            <a class="btn float-right" asp-action="Index">
+                Back To List
+            </a>
+        </div>
+        
+    </div>
+    <div class="right-side">
+        <div class="text-container"><p>Description: @Model.Description</p></div>
+        <div class="plan-info-2">
+            <div class="gym-name"><p>@Model.Gyms.Name</p></div>
+            <div class="price-tag"><p>@Model.WorkoutCategory</p></div>
+        </div>
+
+        <div class="instructor-box">
+        @foreach (var instructor in Model.Instructor_Plan)
+        {
+            <div class="instructor-container">
+                <img class="border-info rounded-circle" src="@instructor.Instructor.ProfilePicture" style="max-width: 150px" />
+                <br />
+                <a asp-controller="Instructors" asp-action="Details" asp-route-id="@instructor.InstructorId">@instructor.Instructor.FullName</a>
+            </div>
+        }
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
